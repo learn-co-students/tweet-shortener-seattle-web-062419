@@ -12,33 +12,41 @@ def dictionary
   }
 end
 
-
-#require "pry"
 def word_substituter(tweets)
-  
   tweet = tweets.split
-  tweet.collect do |word|
+  tweet = tweet.collect do |word|
     if dictionary.keys.include?(word.downcase)
       word = dictionary[word.downcase]
+    else 
+      word
     end
   end
-    return tweet.join(" ")
+  tweet.join(" ")
 end
 
+# require "pry"
 def bulk_tweet_shortener(tweets)
-  
+  tweets.each do |word| 
+    puts word_substituter(word) 
 end
 
+end
+
+require "pry"
 def selective_tweet_shortener(tweets)
-
   if tweets.length > 140 
-else 
-  return tweets
-end
+    word_substituter(tweets)
+  else 
+    return tweets
+  end
 end
 
-def shortened_tweet_truncator(truncated)
-  if truncated.length > 140
+
+
+
+def shortened_tweet_truncator(tweets)
+  if tweets.length > 140
+    tweets[0..139]
   else 
     tweets
   end
